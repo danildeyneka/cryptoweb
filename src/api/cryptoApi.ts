@@ -12,8 +12,8 @@ export const cryptoApi = createApi({
     reducerPath: '/cryptoApi',
     baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com'}),
     endpoints: (builder) => ({
-        getCryptos: builder.query<cryptoApiT, void>({
-            query: () => createRequest('/coins')
+        getCryptos: builder.query<cryptoApiT, number | void>({
+            query: (count: number = 50) => createRequest(`/coins?limit=${count}`)
         })
     })
 })

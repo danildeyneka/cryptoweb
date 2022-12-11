@@ -9,7 +9,7 @@ interface Stats {
     total24hVolume: string;
 }
 
-interface Coin {
+export interface coinT {
     uuid: string;
     symbol: string;
     name: string;
@@ -30,7 +30,7 @@ interface Coin {
 
 interface Data {
     stats: Stats;
-    coins: Coin[];
+    coins: coinT[];
 }
 
 export interface cryptoApiT {
