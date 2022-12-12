@@ -4,6 +4,7 @@ import { useGetCryptosQuery } from '../api/cryptoApi'
 import millify from 'millify'
 import { Link } from 'react-router-dom'
 import { Cryptocurrencies } from './Cryptocurrencies'
+import { News } from './News'
 
 const {Title} = Typography
 
@@ -26,12 +27,13 @@ export const Homepage: FC = () => {
         </Row>
         <div className='flex justify-between'>
             <Title level={2} className='mt-6'>Top 10 Cryptocurrencies in the world</Title>
-            <Title level={3} className='mr-52'><Link to='/cryptocurrencies'>Show more</Link></Title>
+            <Title level={3} className='mr-4'><Link to='/cryptocurrencies'>Show more</Link></Title>
         </div>
         <Cryptocurrencies simplified/>
         <div className='flex justify-between'>
             <Title level={2} className='mt-6'>Latest Crypto news</Title>
-            <Title level={3} className='mr-52'><Link to='/news'>Show more</Link></Title>
+            <Title level={3} className='mr-4'><Link to='/news'>Show more</Link></Title>
         </div>
+        <News simplified/>
     </>
 }
