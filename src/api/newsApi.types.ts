@@ -60,7 +60,8 @@ interface Value {
     about: About[];
     mentions: Mention[];
     provider: Provider[];
-    datePublished: Date;
+    // datePublished: Date;
+    datePublished: string;
     category: string;
 }
 

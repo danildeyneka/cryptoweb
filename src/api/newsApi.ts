@@ -14,7 +14,7 @@ export const newsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'https://bing-news-search1.p.rapidapi.com'}),
     endpoints: build => ({
         getNews: build.query<newsApiT, {category: string, count: number}>({
-            query: ({category, count}) => createRequest(`/news/search?q=${category}&safeSearch=Off&textFormat=Raw&freshness=Day&count=${count}`)
+            query: ({category, count}) => createRequest(`/news/search?q=${category}&safeSearch=Off&textFormat=Raw&count=${count}&sortby=date`)
         })
     })
 })

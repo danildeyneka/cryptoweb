@@ -1,4 +1,5 @@
 // json2ts
+// all items query
 
 interface Stats {
     total: number;
@@ -36,4 +37,59 @@ interface Data {
 export interface cryptoApiT {
     status: string;
     data: Data;
+}
+
+// coin query
+
+interface Link {
+    name: string
+    type: string
+    url: string
+}
+
+interface Supply {
+    confirmed: boolean
+    supplyAt: number
+    max: string
+    total: string
+    circulating: string
+}
+
+interface AllTimeHigh {
+    price: string
+    timestamp: number
+}
+
+export interface cryptoDetailsT {
+    data: {
+        coin: {
+            uuid: string
+            symbol: string
+            name: string
+            description: string
+            color: string
+            iconUrl: string
+            websiteUrl: string
+            links: Link[]
+            supply: Supply
+            numberOfMarkets: number
+            numberOfExchanges: number
+            '24hVolume': string
+            marketCap: string
+            fullyDilutedMarketCap: string
+            price: string
+            btcPrice: string
+            priceAt: number
+            change: string
+            rank: number
+            sparkline: string[]
+            allTimeHigh: AllTimeHigh
+            coinrankingUrl: string
+            tier: number
+            lowVolume: boolean
+            listedAt: number
+            notices: any
+            tags: string[]
+        }
+    }
 }
