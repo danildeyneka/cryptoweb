@@ -15,7 +15,6 @@ export const News: FC<{ simplified?: boolean }> = ({simplified = false}) => {
     const {data} = useGetCryptosQuery(100)
     const selectValues = data?.data?.coins?.map(i => ({label: i.name, value: i.name}))
     selectValues?.unshift({label: 'All crypto news', value: 'Cryptocurrency'})
-    console.log(news?.value)
 
     if (isFetching) return <div>Loading...</div>
     return <>

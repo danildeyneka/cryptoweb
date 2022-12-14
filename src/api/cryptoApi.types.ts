@@ -93,3 +93,17 @@ export interface cryptoDetailsT {
         }
     }
 }
+
+// chart query
+
+export interface chartT {
+    data: {
+        change: string
+        history: History[]
+    }
+}
+
+interface History {
+    price: string
+    timestamp: number
+}
