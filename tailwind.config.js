@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       colors: {
         'bg-dark': '#001529'
+      },
+      margin: {
+        '1/6': '16.66vw'
       }
     },
   },

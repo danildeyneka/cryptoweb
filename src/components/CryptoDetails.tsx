@@ -23,8 +23,8 @@ export const CryptoDetails: FC = () => {
     const {coinId} = useParams()
     const [timePeriod, setTimePeriod] = useState<timeT>('7d')
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId!)
-    const {data: coinHistory} = useGetChartHistoryQuery({coinId, timePeriod})
     const cryptoDetails = data?.data?.coin
+    const {data: coinHistory} = useGetChartHistoryQuery({coinId, timePeriod})
 
     const stats = [
         {
@@ -72,69 +72,71 @@ export const CryptoDetails: FC = () => {
     if (isFetching) return <div>Loading...</div>
     return <>
         <Col className="wrapper">
-            <Title level={ 2 }>
-                Basic { cryptoDetails?.name } stats
-            </Title>
-            <Title level={ 4 }>{ cryptoDetails?.name } Price in USD $. View detailed stats for a selected period</Title>
-            <Select placeholder="Select time period"
-                    options={ time.map(i => ({value: i, label: i})) }
-                    value={ timePeriod }
-                    onChange={ value => setTimePeriod(value) }
-            />
-            <Chart coinName={cryptoDetails!.name} currentPrice={+cryptoDetails!.price} coinHistory={coinHistory}/>
-            <Col>
-                <Col>
+            <Col className="text-center">
+                <Title level={ 2 }>
+                    { cryptoDetails?.name } stats
+                </Title>
+                <Title level={ 4 }>{ cryptoDetails?.name } Price in $USD. View detailed stats for a selected
+                    period</Title>
+                <Select placeholder="Select time period"
+                        options={ time.map(i => ({value: i, label: i})) }
+                        value={ timePeriod }
+                        onChange={ value => setTimePeriod(value) }
+                />
+            </Col>
+            <Chart coinName={ cryptoDetails!.name } currentPrice={ millify(+cryptoDetails!.price) }
+                   coinHistory={ coinHistory! }/>
+
+            {/*stats tables*/ }
+
+            <Col className="flex justify-between">
+                <Col className="w-1/5 mt-3">
                     <Title level={ 2 }>Basic { cryptoDetails?.name } statistics</Title>
-                    <p>Overview { cryptoDetails?.name } stats</p>
-                </Col>
-                <Col className="w-1/5">
                     { stats.map(({icon, title, value}) => (
-                        <Col className="flex justify-between" key={ title }>
-                            <Col>
-                                <Text>{ icon }</Text>
-                                <Text>{ title }</Text>
+                        <Col className="flex justify-between mt-2" key={ title }>
+                            <Col className="relative">
+                                <Col className="text-xl absolute -top-2">{ icon }</Col>
+                                <Text className="text-base ml-8"> { title }</Text>
                             </Col>
-                            <Text>{ value }</Text>
+                            <Text className="text-base">{ value }</Text>
                         </Col>
                     )) }
-                </Col>
-            </Col>
-            <Col>
-                <Col>
-                    <Title level={ 2 }> Other { cryptoDetails?.name } statistics</Title>
-                    <p>Overview { cryptoDetails?.name } stats</p>
-                </Col>
-                <Col className="w-1/5">
+                    <Title level={ 2 } className="mt-4"> Other { cryptoDetails?.name } statistics</Title>
                     { genericStats.map(({icon, title, value}) => (
-                        <Col className="flex justify-between" key={ title }>
-                            <Col>
-                                <Text>{ icon }</Text>
-                                <Text>{ title }</Text>
+
+                        <Col className="flex justify-between mt-2" key={ title }>
+                            <Col className="relative">
+                                <Col className="text-xl absolute -top-2">{ icon }</Col>
+                                <Text className="text-base ml-8"> { title }</Text>
                             </Col>
-                            <Text>{ value }</Text>
+                            <Text className="text-base">{ value }</Text>
                         </Col>
                     )) }
                 </Col>
-            </Col>
-            <Col>
-                <Row>
-                    <Title level={ 2 }>
-                        What is { cryptoDetails?.name }
-                    </Title>
-                    { HTMLReactParser(cryptoDetails!.description) }
-                </Row>
-                <Col>
-                    <Title level={3}>
-                        {cryptoDetails?.links.map(i => (
-                            <Row key={i.url}>
-                                <Title level={5}>
-                                    {i.type}
+
+                {/*links*/ }
+
+                <Col className="mt-16 mr-8">
+                    <Title level={ 3 } className='shadow-2xl p-5'>
+                        { cryptoDetails?.links.map(i => (
+                            <Row key={ i.url }>
+                                <Title level={ 5 } className='text-base'>
+                                    { i.type }:
                                 </Title>
-                                <a href={i.url} target='_blank' rel='noreferrer noopener nofollower'>{i.name}</a>
+                                <a href={ i.url } target="_blank" rel="noreferrer noopener nofollower"
+                                   className="block pl-2 m-1">{ i.name }</a>
                             </Row>
-                        ))}
+                        )) }
                     </Title>
                 </Col>
+            </Col>
+
+            <Col>
+                <Title level={ 2 } className='mt-5 text-center'>
+                    What is { cryptoDetails?.name }
+                </Title>
+                <Col className='text-base p-2 parsed-html'>
+                { HTMLReactParser(cryptoDetails!.description) }</Col>
             </Col>
         </Col>
     </>

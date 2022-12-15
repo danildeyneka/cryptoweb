@@ -1,0 +1,1 @@
+export const fromUnixDate = (date: number) => new Date(date * 1000).toLocaleDateString()
