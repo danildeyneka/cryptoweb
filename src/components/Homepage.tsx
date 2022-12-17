@@ -15,16 +15,18 @@ export const Homepage: FC = () => {
 
     if (isFetching) return <div>Loading...</div>
     return <>
-        <Title level={ 2 } className='ml-80'>
+        <Col  className='text-center w-2/3 m-auto'>
+        <Title level={ 2 }>
             Global Crypto Stats
         </Title>
-        <Row>
-            <Col span={ 12 }><Statistic title="Total Cryptocurrencies" value={ globalStats!.total }/></Col>
-            <Col span={ 12 }><Statistic title="Total Exchanges" value={ millify(globalStats!.totalExchanges) }/></Col>
-            <Col span={ 12 }><Statistic title="Total Market Cap" value={ millify(+globalStats!.totalMarketCap) }/></Col>
-            <Col span={ 12 }><Statistic title="Total 24h volume" value={ millify(+globalStats!.total24hVolume) }/></Col>
-            <Col span={ 12 }><Statistic title="Total Markets" value={ millify(globalStats!.totalMarkets) }/></Col>
+        <Row className='flex justify-between flex-wrap'>
+            <Col className='w-36'><Statistic title="Total Cryptocurrencies" value={ globalStats!.total }/></Col>
+            <Col className='w-36'><Statistic title="Total Exchanges" value={ millify(globalStats!.totalExchanges) }/></Col>
+            <Col className='w-36'><Statistic title="Total Market Cap" value={ millify(+globalStats!.totalMarketCap) }/></Col>
+            <Col className='w-36'><Statistic title="Total 24h volume" value={ millify(+globalStats!.total24hVolume) }/></Col>
+            <Col className='w-36'><Statistic title="Total Markets" value={ millify(globalStats!.totalMarkets) }/></Col>
         </Row>
+        </Col>
         <div className='flex justify-between'>
             <Title level={2} className='mt-6'>Top 10 Cryptocurrencies in the world</Title>
             <Title level={3} className='mr-4'><Link to='/cryptocurrencies'>Show more</Link></Title>

@@ -7,7 +7,7 @@ export const App: FC = () => {
 
     return <>
         <Navbar/>
-        <Layout className="ml-1/6 p-6">
+        <Layout className="lg:ml-1/6 p-6">
             <Routes>
                 <Route path="/" index element={ <Homepage/> }/>
                 <Route path="cryptocurrencies" element={ <Cryptocurrencies/> }/>

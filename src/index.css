@@ -7,4 +7,5 @@
 .parsed-html h3 {
   font-size: 18px;
   font-weight: bold;
+  margin: 4px 0;
 }

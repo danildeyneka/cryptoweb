@@ -39,7 +39,7 @@ export const News: FC<{ simplified?: boolean }> = ({simplified = false}) => {
                                      className="w-20 h-20 m-2"
                                 />
                             </div>
-                            <p className="">
+                            <p>
                                 { i.description.length > 100
                                     ? `${ i.description.substring(0, 200) } ...`
                                     : i.description }
