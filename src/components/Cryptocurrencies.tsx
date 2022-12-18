@@ -25,17 +25,17 @@ export const Cryptocurrencies: FC<{ simplified?: boolean }> = ({simplified}) => 
                    className="text-center text-xl p-2"/>
         </div> }
         <Row gutter={ [22, 22] }>
-            { cryptos?.map((i) => (<Col lg={ 6 } xs={ 24 } sm={ 12 } key={ i.uuid }>
+            { cryptos?.map((i) => (<Col lg={ 6 } md={ 8 } sm={ 12 } xs={ 24 } key={ i.uuid }>
                 <Link to={ `/cryptocurrencies/${ i.uuid }` }>
                     <Card title={ `${ i.rank } - ${ i.name }` }
                           extra={ <img src={ i.iconUrl } alt={ i.uuid } className="w-10 h-10"/> } hoverable>
                         <Col className="flex justify-between">
-                            <Col className='-ml-5'>
+                            <Col className="-ml-5">
                                 <p>Price: ${ millify(+i.price) }</p>
                                 <p>Market Cap: { millify(+i.marketCap) }</p>
                                 <p>Daily Change: { millify(+i.change) }%</p>
                             </Col>
-                            <Col className='-mr-6 mt-2'>
+                            <Col className="-mr-6 mt-2">
                                 <p>Created on</p>
                                 <p>{ fromUnixDate(i.listedAt) }</p>
                             </Col>

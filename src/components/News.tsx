@@ -33,23 +33,23 @@ export const News: FC<{ simplified?: boolean }> = ({simplified = false}) => {
                     <Card hoverable className="h-72 relative">
                         <a href={ i.url } target="_blank" rel="nofollow noopener noreferrer">
                             <div className="flex justify-between">
-                                <Typography.Title level={ 4 }>{ i.name }</Typography.Title>
+                                <Typography.Title level={ 4 }
+                                                  className="h-[88px] xxl:h-auto overflow-hidden">{ i.name }</Typography.Title>
                                 <img src={ i.image?.thumbnail?.contentUrl || defaultImg }
                                      alt="news image"
                                      className="w-20 h-20 m-2"
                                 />
                             </div>
-                            <p>
-                                { i.description.length > 100
-                                    ? `${ i.description.substring(0, 200) } ...`
-                                    : i.description }
+                            <p className="h-28 overflow-hidden">
+                                { i.description }
                             </p>
-                            <div className="absolute bottom-3">
+                            <div className="absolute bottom-4">
                                 <Avatar src={ i.provider[0]?.image?.thumbnail?.contentUrl || defaultImg }
                                         alt="author avatar" className="w-8 h-8 mr-2"/>
-                                <Typography.Text>{ i.provider[0]?.name }</Typography.Text>
+                                <Typography.Text className="mt-1">{ i.provider[0]?.name }</Typography.Text>
                             </div>
-                            <Typography.Text className="absolute right-5 bottom-4 text-base">
+                            <Typography.Text
+                                className="absolute right-5 bottom-[10px] xl:bottom-[21px] xl:text-base text-xs block">
                                 { moment(i.datePublished).startOf('seconds').fromNow() }</Typography.Text>
                         </a>
                     </Card>

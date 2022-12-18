@@ -14,13 +14,13 @@ export const cryptoApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com'}),
     endpoints: (builder) => ({
         getCryptos: builder.query<cryptoApiT, number | void>({
-            query: (count = 50) => createRequest(`/coins?limit=${ count }`)
+            query: (count = 50) => createRequest(`coins?limit=${ count }`)
         }),
         getCryptoDetails: builder.query<cryptoDetailsT, string>({
-            query: (id) => createRequest(`/coin/${ id }`)
+            query: (id) => createRequest(`coin/${ id }`)
         }),
         getChartHistory: builder.query<chartT, ({ coinId?: string, timePeriod: timeT })>({
-            query: ({coinId, timePeriod}) => createRequest(`/coin/${ coinId }/history`, {timePeriod: timePeriod})
+            query: ({coinId, timePeriod}) => createRequest(`coin/${ coinId }/history`, {timePeriod: timePeriod})
         })
     })
 })

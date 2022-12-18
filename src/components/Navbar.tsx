@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { Avatar, Button, Col, Menu, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 import icon from '../assets/images/logo.jpg'
-import { BulbOutlined, FundOutlined, HomeOutlined, MenuOutlined } from '@ant-design/icons'
+import { BulbOutlined, FundOutlined, HomeOutlined, MenuOutlined, SwapOutlined } from '@ant-design/icons'
 
 const menuItems = [
     {
@@ -12,29 +12,35 @@ const menuItems = [
     },
     {
         key: 'Cryptocurrencies',
-        label: <Link to="/cryptocurrencies">Cryptocurrencies</Link>,
+        label: <Link to="cryptocurrencies">Cryptocurrencies</Link>,
         icon: <FundOutlined/>
     },
     {
         key: 'News',
-        label: <Link to="/news">News</Link>,
+        label: <Link to="news">News</Link>,
         icon: <BulbOutlined/>
     }
 ]
 
 export const Navbar: FC = () => {
     const [activeMenu, setActiveMenu] = useState(true)
-    const [screenSize, setScreenSize] = useState<number | null>(null)
+    const [screenSize, setScreenSize] = useState<number>(1920)
+    const closeMenu = () => {
+        if (screenSize < 1024) setActiveMenu(false)
+        else return
+    }
 
     useEffect(() => {
+        setScreenSize(window.innerWidth)
         const resizeHandler = () => setScreenSize(window.innerWidth)
         window.addEventListener('resize', resizeHandler)
         return () => window.removeEventListener('resize', resizeHandler)
     }, [])
 
     useEffect(() => {
-        if (window.innerWidth < 1024) setActiveMenu(false)
-        else setActiveMenu(true)
+        if (screenSize < 1024) {
+            setActiveMenu(false)
+        } else setActiveMenu(true)
     }, [screenSize])
 
     return <aside className="sticky h-52 w-full shadow-2xl bg-bg-dark z-10 lg:w-1/6 lg:h-full lg:fixed">
@@ -51,8 +57,7 @@ export const Navbar: FC = () => {
                         </Col>
                     </Button> }
             </div>
-            { activeMenu && <Menu items={ menuItems } theme={ 'dark' } className="-mt-5 lg:mt-0"
-                                  onClick={ () => setActiveMenu(false) }/> }
+            { activeMenu && <Menu items={ menuItems } theme={ 'dark' } onClick={ closeMenu }/> }
         </nav>
     </aside>
 }
