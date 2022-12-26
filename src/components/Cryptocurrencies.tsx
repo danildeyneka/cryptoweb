@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { useGetCryptosQuery } from '../api/cryptoApi'
 import { coinT } from '../api/cryptoApi.types'
 import { Card, Col, Input, Row } from 'antd'
 import { Link } from 'react-router-dom'
 import millify from 'millify'
 import { fromUnixDate } from '../assets/helpers/helperFunctions'
+import { useDebounce } from '../hooks/useDebounce'
 
 export const Cryptocurrencies: FC<{ simplified?: boolean }> = ({simplified}) => {
     const count = simplified ? 10 : 100
@@ -12,11 +13,14 @@ export const Cryptocurrencies: FC<{ simplified?: boolean }> = ({simplified}) => 
     const [cryptos, setCryptos] = useState<coinT[] | undefined>(undefined)
     const [searchTerm, setSearchTerm] = useState('')
 
-    useEffect(() => {
-        setCryptos(cryptoData?.data?.coins)
+    useDebounce(() => {
         const filteredData = cryptoData?.data?.coins.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
         setCryptos(filteredData)
-    }, [searchTerm, cryptoData])
+    }, [cryptos, searchTerm], 300)
+
+    useEffect(() => {
+        setCryptos(cryptoData?.data?.coins)
+    }, [cryptoData])
 
     if (isFetching) return <div>Loading...</div>
     return <>

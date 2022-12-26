@@ -33,12 +33,12 @@ export const Homepage: FC = () => {
         </Col>
         <div className="flex justify-between my-5">
             <h2 className="text-xl font-bold pr-4 md:text-2xl">Top 10 Cryptocurrencies in the world</h2>
-            <h3 className="mr-4 text-base text-blue-500 w-10 -mt-2"><Link to="/cryptocurrencies">Show more</Link></h3>
+            <h3 className="mr-4 text-base text-blue-500 w-10 -mt-2 md:w-40 md:mt-0"><Link to="/cryptocurrencies">Show more</Link></h3>
         </div>
         <Cryptocurrencies simplified/>
         <div className="flex justify-between my-5">
             <h2 className="text-xl font-bold md:text-2xl">Latest Crypto news</h2>
-            <h3 className="mr-4 text-base text-blue-500 w-10 -mt-2"><Link to="/news">Show more</Link></h3>
+            <h3 className="mr-4 text-base text-blue-500 w-10 -mt-2 md:w-40 md:mt-0"><Link to="/news">Show more</Link></h3>
         </div>
         <News simplified/>
     </>
